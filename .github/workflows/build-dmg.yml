@@ -1,0 +1,31 @@
+name: Build DMG
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-dmg:
+    name: Build macOS DMG
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build DMG
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: bash scripts/build_dmg.sh
+
+      - name: Upload DMG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EyeBreak-dmg
+          path: dist/*.dmg
+          if-no-files-found: error
