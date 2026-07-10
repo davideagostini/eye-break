@@ -96,6 +96,8 @@ The generated file is written to `dist/`.
 
 The repository includes a GitHub Actions workflow that builds the DMG on every push to `main` and uploads it as a workflow artifact.
 
+When a version tag is pushed, for example `v0.1.0`, the same workflow also creates a GitHub Release and attaches the DMG.
+
 ## Distribution Notes
 
 The current build uses ad-hoc signing. For public distribution outside personal testing, the app should be signed with an Apple Developer ID and notarized.
