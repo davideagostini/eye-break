@@ -1,12 +1,14 @@
 import AppKit
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var statusItem: NSStatusItem!
     private var scheduler: BreakScheduler!
     private var settingsWindowController: SettingsWindowController?
     private var statsWindowController: StatsWindowController?
     private var activeOverlayController: BreakOverlayController?
     private var enabledItem: NSMenuItem!
+    private var nextEyeBreakItem: NSMenuItem!
+    private var nextStandBreakItem: NSMenuItem!
     private var pause30Item: NSMenuItem!
     private var pause60Item: NSMenuItem!
     private var resumeItem: NSMenuItem!
@@ -35,12 +37,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.image = NSImage(systemSymbolName: "eye", accessibilityDescription: "Eye Break")
 
         let menu = NSMenu()
+        menu.delegate = self
         menu.addItem(sectionHeader("Status"))
 
         enabledItem = NSMenuItem(title: "Enabled", action: #selector(toggleEnabled), keyEquivalent: "")
         enabledItem.state = settings.isEnabled ? .on : .off
         enabledItem.target = self
         menu.addItem(enabledItem)
+
+        nextEyeBreakItem = statusTextItem()
+        menu.addItem(nextEyeBreakItem)
+
+        nextStandBreakItem = statusTextItem()
+        menu.addItem(nextStandBreakItem)
 
         menu.addItem(NSMenuItem.separator())
         menu.addItem(sectionHeader("Controls"))
@@ -104,6 +113,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         updateMenuState()
     }
 
+    func menuWillOpen(_ menu: NSMenu) {
+        updateMenuState()
+    }
+
     private func sectionHeader(_ title: String) -> NSMenuItem {
         let item = NSMenuItem(title: title.uppercased(), action: nil, keyEquivalent: "")
         item.isEnabled = false
@@ -114,6 +127,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 .foregroundColor: NSColor.secondaryLabelColor
             ]
         )
+        return item
+    }
+
+    private func statusTextItem() -> NSMenuItem {
+        let item = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+        item.isEnabled = false
         return item
     }
 
@@ -129,6 +148,42 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let version = info?["CFBundleShortVersionString"] as? String ?? "0.0.0"
         let build = info?["CFBundleVersion"] as? String ?? "0"
         return "\(version) (\(build))"
+    }
+
+    private func nextBreakTitle(for kind: BreakKind, settings: AppSettings) -> String {
+        let label = kind == .eyes ? "Next eye break" : "Next stand break"
+
+        if !settings.isEnabled {
+            return "\(label): Off"
+        }
+
+        if scheduler.hasActiveBreak {
+            return "\(label): In progress"
+        }
+
+        if scheduler.isManuallyPaused {
+            return "\(label): Paused"
+        }
+
+        if scheduler.snoozeRemainingSeconds != nil {
+            return "\(label): Snoozed"
+        }
+
+        return "\(label): \(formatDuration(scheduler.remainingSeconds(until: kind)))"
+    }
+
+    private func formatDuration(_ seconds: TimeInterval) -> String {
+        let totalSeconds = max(0, Int(seconds.rounded()))
+        let minutes = totalSeconds / 60
+        let remainingSeconds = totalSeconds % 60
+
+        if minutes >= 60 {
+            let hours = minutes / 60
+            let extraMinutes = minutes % 60
+            return extraMinutes == 0 ? "\(hours)h" : "\(hours)h \(extraMinutes)m"
+        }
+
+        return "\(minutes)m \(remainingSeconds)s"
     }
 
     private func textBadgeIcon(_ text: String) -> NSImage {
@@ -250,6 +305,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func updateMenuState() {
         let settings = AppSettings()
         enabledItem?.state = settings.isEnabled ? .on : .off
+        nextEyeBreakItem?.title = nextBreakTitle(for: .eyes, settings: settings)
+        nextStandBreakItem?.title = nextBreakTitle(for: .stand, settings: settings)
         pause30Item?.isEnabled = settings.isEnabled
         pause60Item?.isEnabled = settings.isEnabled
         resumeItem?.isEnabled = settings.isEnabled && scheduler.isManuallyPaused
