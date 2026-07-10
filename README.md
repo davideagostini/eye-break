@@ -10,6 +10,7 @@ It stays out of the way while you work, counts only active computer time, and sh
 - Full-screen overlay across connected displays.
 - Skip and snooze controls.
 - Temporary pause controls for 30 minutes or 1 hour.
+- Next eye break and next stand break shown in the menu.
 - Configurable intervals and durations.
 - Optional launch at login.
 - Simple daily stats with a last-7-days view.
@@ -28,6 +29,7 @@ Timers advance only while the Mac appears active. If there is no keyboard or mou
 From the menu bar you can:
 
 - Enable or disable reminders.
+- See the next eye break and stand break times.
 - Stop the current break.
 - Pause reminders temporarily.
 - Resume reminders.
