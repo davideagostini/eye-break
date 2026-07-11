@@ -29,8 +29,11 @@ final class BreakScheduler {
         }
     }
 
-    func reloadSettings() {
+    func reloadSettings(resetTimers: Bool = false) {
         settings = AppSettings()
+        if resetTimers {
+            resetElapsedBreakTime()
+        }
     }
 
     var hasActiveBreak: Bool {
@@ -80,6 +83,12 @@ final class BreakScheduler {
     func resume() {
         pausedUntil = nil
         snoozedUntil = nil
+        lastTick = Date()
+    }
+
+    func resetElapsedBreakTime() {
+        eyeActiveSeconds = 0
+        standActiveSeconds = 0
         lastTick = Date()
     }
 

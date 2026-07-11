@@ -136,27 +136,27 @@ final class SettingsWindowController: NSWindowController {
 
     @objc private func updateEyeInterval(_ sender: NSTextField) {
         settings.eyeIntervalMinutes = sender.integerValue
-        scheduler.reloadSettings()
+        scheduler.reloadSettings(resetTimers: true)
     }
 
     @objc private func updateEyeDuration(_ sender: NSTextField) {
         settings.eyeDurationSeconds = sender.integerValue
-        scheduler.reloadSettings()
+        scheduler.reloadSettings(resetTimers: true)
     }
 
     @objc private func updateStandInterval(_ sender: NSTextField) {
         settings.standIntervalMinutes = sender.integerValue
-        scheduler.reloadSettings()
+        scheduler.reloadSettings(resetTimers: true)
     }
 
     @objc private func updateStandDuration(_ sender: NSTextField) {
         settings.standDurationSeconds = sender.integerValue
-        scheduler.reloadSettings()
+        scheduler.reloadSettings(resetTimers: true)
     }
 
     @objc private func updateSnooze(_ sender: NSTextField) {
         settings.snoozeDurationMinutes = sender.integerValue
-        scheduler.reloadSettings()
+        scheduler.reloadSettings(resetTimers: true)
     }
 
     private func showError(_ message: String) {
