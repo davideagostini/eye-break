@@ -17,7 +17,6 @@ final class BreakScheduler {
     private var activeBreak: BreakKind?
     private var snoozedUntil: Date?
     private var pausedUntil: Date?
-    private var didResetForInactivity = false
 
     init(settings: AppSettings, statsStore: StatsStore) {
         self.settings = settings
@@ -147,7 +146,6 @@ final class BreakScheduler {
 
         if delta > scheduleResetInterval {
             resetElapsedBreakTime(at: now)
-            didResetForInactivity = true
             return
         }
 
@@ -157,19 +155,10 @@ final class BreakScheduler {
             return
         }
 
-        if idleSeconds >= scheduleResetInterval {
-            if !didResetForInactivity {
-                resetElapsedBreakTime(at: now)
-                didResetForInactivity = true
-            }
-            return
-        }
-
         guard idleSeconds < inactivePauseInterval else {
             return
         }
 
-        didResetForInactivity = false
         eyeActiveSeconds += delta
         standActiveSeconds += delta
         statsStore.recordActiveTime(delta)
@@ -195,7 +184,6 @@ final class BreakScheduler {
     private func resetScheduleForLongDelayIfNeeded(at date: Date) {
         guard date.timeIntervalSince(lastTick) > scheduleResetInterval else { return }
         resetElapsedBreakTime(at: date)
-        didResetForInactivity = true
     }
 }
 
