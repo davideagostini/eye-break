@@ -140,7 +140,11 @@ final class BreakScheduler {
         let delta = now.timeIntervalSince(lastTick)
         lastTick = now
 
-        guard delta <= maximumTickInterval else { return }
+        if delta > maximumTickInterval {
+            resetElapsedBreakTime()
+            return
+        }
+
         guard isUserActive else { return }
         eyeActiveSeconds += delta
         standActiveSeconds += delta
