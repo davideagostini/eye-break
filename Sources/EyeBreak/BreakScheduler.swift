@@ -5,6 +5,7 @@ import IOKit
 final class BreakScheduler {
     var onBreakRequested: ((BreakKind) -> Void)?
 
+    private let maximumTickInterval: TimeInterval = 5
     private var settings: AppSettings
     private let statsStore: StatsStore
     private var timer: Timer?
@@ -130,6 +131,7 @@ final class BreakScheduler {
         let delta = now.timeIntervalSince(lastTick)
         lastTick = now
 
+        guard delta <= maximumTickInterval else { return }
         guard isUserActive else { return }
         eyeActiveSeconds += delta
         standActiveSeconds += delta

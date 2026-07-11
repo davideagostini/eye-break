@@ -169,6 +169,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return "\(label): Snoozed"
         }
 
+        if kind == .eyes {
+            let eyeRemaining = scheduler.remainingSeconds(until: .eyes)
+            let standRemaining = scheduler.remainingSeconds(until: .stand)
+            if standRemaining <= eyeRemaining {
+                return "\(label): After stand break"
+            }
+        }
+
         return "\(label): \(formatDuration(scheduler.remainingSeconds(until: kind)))"
     }
 
