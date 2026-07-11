@@ -104,6 +104,7 @@ final class BreakScheduler {
         case .completed, .skipped:
             switch kind {
             case .eyes:
+                normalizeStandTimerAfterEyeBreak()
                 eyeActiveSeconds = 0
             case .stand:
                 eyeActiveSeconds = 0
@@ -179,6 +180,15 @@ final class BreakScheduler {
         eyeActiveSeconds = 0
         standActiveSeconds = 0
         lastTick = date
+    }
+
+    private func normalizeStandTimerAfterEyeBreak() {
+        let eyeInterval = settings.intervalSeconds(for: .eyes)
+        guard eyeInterval > 0 else { return }
+
+        let completedEyeIntervals = max(1, Int((standActiveSeconds / eyeInterval).rounded()))
+        let normalizedStandSeconds = TimeInterval(completedEyeIntervals) * eyeInterval
+        standActiveSeconds = min(normalizedStandSeconds, settings.intervalSeconds(for: .stand))
     }
 
     private func resetScheduleForLongDelayIfNeeded(at date: Date) {
