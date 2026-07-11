@@ -5,6 +5,14 @@ final class StatsWindowController: NSWindowController, NSWindowDelegate, NSTable
     private let settings = AppSettings()
     private let contentStack = NSStackView()
     private let tableView = NSTableView()
+    private let computerTimeValueLabel = NSTextField(labelWithString: "")
+    private let computerTimeDetailLabel = NSTextField(labelWithString: "")
+    private let expectedValueLabel = NSTextField(labelWithString: "")
+    private let expectedDetailLabel = NSTextField(labelWithString: "")
+    private let completedValueLabel = NSTextField(labelWithString: "")
+    private let completedDetailLabel = NSTextField(labelWithString: "")
+    private let skippedValueLabel = NSTextField(labelWithString: "")
+    private let skippedDetailLabel = NSTextField(labelWithString: "")
     private var records: [DailyBreakStats] = []
     private var refreshTimer: Timer?
 
@@ -57,28 +65,20 @@ final class StatsWindowController: NSWindowController, NSWindowDelegate, NSTable
             contentStack.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor, constant: -22)
         ])
 
+        buildContent()
         return container
     }
 
-    private func refresh() {
-        contentStack.arrangedSubviews.forEach {
-            contentStack.removeArrangedSubview($0)
-            $0.removeFromSuperview()
-        }
-
-        records = statsStore.recentRecords(days: 7)
-        let today = records.first ?? DailyBreakStats(day: todayKey())
-        let expectedToday = expectedBreaks(for: today)
-
+    private func buildContent() {
         let title = NSTextField(labelWithString: "Today")
         title.font = NSFont.systemFont(ofSize: 22, weight: .semibold)
         contentStack.addArrangedSubview(title)
 
         let cards = NSStackView(views: [
-            metricCard(title: "Computer time", value: formatActiveTime(today.activeSeconds), detail: "active use"),
-            metricCard(title: "Expected", value: "\(expectedToday.total)", detail: "\(expectedToday.eyes) eye, \(expectedToday.stand) stand"),
-            metricCard(title: "Completed", value: "\(today.completedTotal)", detail: "\(today.completedEyes) eye, \(today.completedStand) stand"),
-            metricCard(title: "Skipped", value: "\(today.skippedTotal)", detail: "\(today.skippedEyes) eye, \(today.skippedStand) stand")
+            metricCard(title: "Computer time", valueLabel: computerTimeValueLabel, detailLabel: computerTimeDetailLabel),
+            metricCard(title: "Expected", valueLabel: expectedValueLabel, detailLabel: expectedDetailLabel),
+            metricCard(title: "Completed", valueLabel: completedValueLabel, detailLabel: completedDetailLabel),
+            metricCard(title: "Skipped", valueLabel: skippedValueLabel, detailLabel: skippedDetailLabel)
         ])
         cards.orientation = .horizontal
         cards.spacing = 10
@@ -99,7 +99,27 @@ final class StatsWindowController: NSWindowController, NSWindowDelegate, NSTable
         contentStack.addArrangedSubview(note)
     }
 
-    private func metricCard(title: String, value: String, detail: String) -> NSView {
+    private func refresh() {
+        records = statsStore.recentRecords(days: 7)
+        let today = records.first ?? DailyBreakStats(day: todayKey())
+        let expectedToday = expectedBreaks(for: today)
+
+        computerTimeValueLabel.stringValue = formatActiveTime(today.activeSeconds)
+        computerTimeDetailLabel.stringValue = "active use"
+
+        expectedValueLabel.stringValue = "\(expectedToday.total)"
+        expectedDetailLabel.stringValue = "\(expectedToday.eyes) eye, \(expectedToday.stand) stand"
+
+        completedValueLabel.stringValue = "\(today.completedTotal)"
+        completedDetailLabel.stringValue = "\(today.completedEyes) eye, \(today.completedStand) stand"
+
+        skippedValueLabel.stringValue = "\(today.skippedTotal)"
+        skippedDetailLabel.stringValue = "\(today.skippedEyes) eye, \(today.skippedStand) stand"
+
+        tableView.reloadData()
+    }
+
+    private func metricCard(title: String, valueLabel: NSTextField, detailLabel: NSTextField) -> NSView {
         let container = NSView()
         container.wantsLayer = true
         container.layer?.cornerRadius = 8
@@ -112,12 +132,10 @@ final class StatsWindowController: NSWindowController, NSWindowDelegate, NSTable
         titleLabel.textColor = .secondaryLabelColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let valueLabel = NSTextField(labelWithString: value)
         valueLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 24, weight: .semibold)
         valueLabel.textColor = .labelColor
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let detailLabel = NSTextField(labelWithString: detail)
         detailLabel.font = NSFont.systemFont(ofSize: 11)
         detailLabel.textColor = .tertiaryLabelColor
         detailLabel.lineBreakMode = .byTruncatingTail
