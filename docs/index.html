@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eye Break — macOS Menu Bar App for Healthy Screen Breaks</title>
+  <meta name="description" content="Eye Break is a native macOS menu-bar app that reminds you to rest your eyes, stand up, and take screen breaks based on active computer time." />
+  <meta name="author" content="Davide Agostini" />
+  <link rel="canonical" href="https://davideagostini.github.io/eye-break/" />
+
+  <meta property="og:title" content="Eye Break — macOS Menu Bar App for Healthy Screen Breaks" />
+  <meta property="og:description" content="A small native macOS app for eye breaks, stand breaks, full-screen pause overlays, snooze controls, and local daily stats." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://davideagostini.github.io/eye-break/" />
+  <meta property="og:site_name" content="Eye Break" />
+  <meta property="og:image" content="https://davideagostini.github.io/eye-break/apple-touch-icon.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Eye Break",
+    "operatingSystem": "macOS",
+    "applicationCategory": "HealthApplication",
+    "description": "A native macOS menu-bar app that reminds you to rest your eyes and step away from the screen at regular intervals.",
+    "url": "https://davideagostini.github.io/eye-break/",
+    "downloadUrl": "https://github.com/davideagostini/eye-break/releases/latest",
+    "softwareHelp": "https://github.com/davideagostini/eye-break",
+    "author": {
+      "@type": "Person",
+      "name": "Davide Agostini",
+      "url": "https://github.com/davideagostini"
+    },
+    "featureList": [
+      "Short eye breaks and longer stand breaks",
+      "Full-screen overlay across connected displays",
+      "Skip and snooze controls",
+      "Temporary pause controls",
+      "Active computer time tracking",
+      "Configurable intervals and durations",
+      "Launch at login",
+      "Local daily stats"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <nav class="lp-nav">
+    <div class="lp">
+      <a class="lp-brand" href="#top">
+        <span class="mk"><svg class="glyph" width="18" height="18" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12C6 5.8 10.8 3 16 3s10 2.8 13.5 9c-3.5 6.2-8.3 9-13.5 9S6 18.2 2.5 12Z"/><circle cx="16" cy="12" r="4.8"/></svg></span>
+        Eye Break
+      </a>
+      <div class="lp-nav-actions">
+        <button class="lp-nav-toggle" type="button" aria-expanded="false" aria-controls="lp-nav-menu" aria-label="Open menu">
+          <span class="lp-nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="cta lp-nav-cta" href="#get">Get Eye Break</a>
+      </div>
+      <div class="lp-nav-links" id="lp-nav-menu">
+        <a href="#why">Why</a>
+        <a href="#features">Features</a>
+        <a href="#schedule">Schedule</a>
+        <a class="gh" href="https://github.com/davideagostini/eye-break" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.34 9.34 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
+        <a class="cta" href="#get">Get Eye Break</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero lp" id="top">
+    <p class="kicker">macOS menu-bar app</p>
+    <h1>Rest your eyes.<br />Keep your <span>rhythm.</span></h1>
+    <p class="sub">
+      Eye Break is a tiny native macOS app that reminds you to pause at the right moments.
+      It counts active computer time, shows a calm full-screen overlay, and stays quiet when you step away.
+    </p>
+    <div class="hero-cta">
+      <a class="bigbtn primary" href="https://github.com/davideagostini/eye-break/releases/latest" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M2 20h20"/><path d="M10 16.5 9.4 20M14 16.5l.6 3.5"/></svg>Download for macOS</a>
+    </div>
+    <div class="hero-meta">
+      <span>Native macOS app</span><span class="dot"></span>
+      <span>20-20 eye breaks</span><span class="dot"></span>
+      <span>Local stats</span>
+    </div>
+
+    <div class="demo-block">
+      <div class="demo-cap"><span class="live"></span> Interactive demo — a recreation of the app flow</div>
+      <div class="stage" id="demo-stage" data-kind="eyes">
+        <div class="menubar">
+          <div class="mb-left">
+            <span class="mb-app"></span>
+            <span class="mb-app">Finder</span>
+            <span class="mb-menu">File</span>
+            <span class="mb-menu">Edit</span>
+            <span class="mb-menu">View</span>
+          </div>
+          <div class="mb-spacer"></div>
+          <div class="mb-right">
+            <span class="mb-extra"><svg width="18" height="12" viewBox="0 0 26 13" fill="none" aria-hidden="true"><rect x="0.7" y="0.7" width="21" height="11.6" rx="3" stroke="currentColor" stroke-width="1.1" opacity="0.7"/><rect x="2.4" y="2.4" width="13" height="8.2" rx="1.6" fill="currentColor"/><path d="M23.4 4.4v4.2a2 2 0 0 0 1.4-1.9v-.4a2 2 0 0 0-1.4-1.9z" fill="currentColor" opacity="0.7"/></svg></span>
+            <span class="mb-extra"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2.5 6.8A10 10 0 0 1 15.5 6.8"/><path d="M4.8 9.4A6.4 6.4 0 0 1 13.2 9.4"/><path d="M7 12A2.8 2.8 0 0 1 11 12"/><circle cx="9" cy="13.6" r="0.7" fill="currentColor" stroke="none"/></svg></span>
+            <div class="statusitem" title="Eye Break">
+              <span class="hl"></span>
+              <svg class="glyph" width="18" height="18" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12C6 5.8 10.8 3 16 3s10 2.8 13.5 9c-3.5 6.2-8.3 9-13.5 9S6 18.2 2.5 12Z"/><circle cx="16" cy="12" r="4.8"/></svg>
+            </div>
+            <span class="mb-clock">Wed 9:41</span>
+          </div>
+        </div>
+
+        <div class="desktop">
+          <div class="work-window window-main">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="doc-lines">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <div class="work-window window-side">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="app-grid">
+              <b></b><b></b><b></b><b></b>
+            </div>
+          </div>
+          <div class="work-window window-code">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="code-lines">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+
+          <div class="overlay-card">
+            <svg id="demo-break-icon" class="break-icon" width="84" height="84" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+            <h2 id="demo-title">Rest your eyes</h2>
+            <p id="demo-message">Look at the farthest point you can see. Blink slowly.</p>
+            <strong id="demo-timer">00:20</strong>
+            <div class="overlay-actions">
+              <button type="button" data-demo-action="skip">Skip</button>
+              <button type="button" class="mint" data-demo-action="snooze">Snooze 5m</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-dock">
+          <div>
+            <span class="dock-label">Status</span>
+            <b id="demo-status">Eye break in progress</b>
+          </div>
+          <div>
+            <span class="dock-label">Next eye break</span>
+            <b id="next-eye">Now</b>
+          </div>
+          <div>
+            <span class="dock-label">Next stand break</span>
+            <b id="next-stand">40m 00s</b>
+          </div>
+          <div class="seg">
+            <button class="on" type="button" data-demo-kind="eyes">Eyes</button>
+            <button type="button" data-demo-kind="stand">Stand</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="lp-sec lp" id="why">
+    <div class="lp-sec-head">
+      <p class="eyebrow">Why</p>
+      <h2>Screen time gets slippery when the day is full.</h2>
+      <p>Eye Break gives you a small external rhythm: look away often, stand up sometimes, and avoid counting idle time as work time.</p>
+    </div>
+    <div class="why-grid">
+      <div class="card why-card before">
+        <span class="wc-tag">Without a helper</span>
+        <ul class="why-steps">
+          <li><span class="n">1</span><span class="txt">You plan to look away regularly</span></li>
+          <li><span class="n">2</span><span class="txt">A task pulls you in for another hour</span></li>
+          <li><span class="n">3</span><span class="txt">A generic timer keeps running while you are away</span></li>
+          <li><span class="n">4</span><span class="txt">Breaks become easy to ignore</span></li>
+        </ul>
+      </div>
+      <div class="card why-card after">
+        <span class="wc-tag">With Eye Break</span>
+        <ul class="why-steps">
+          <li><span class="n">1</span><span class="txt">Eye breaks use a 20 minute default rhythm</span></li>
+          <li><span class="n">2</span><span class="txt">Stand breaks arrive less often and last longer</span></li>
+          <li><span class="n">3</span><span class="txt">Timers advance only while the Mac appears active</span></li>
+          <li><span class="n">4</span><span class="txt">Stats stay local on your Mac</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-sec lp" id="features">
+    <div class="lp-sec-head">
+      <p class="eyebrow">What it does</p>
+      <h2>Gentle reminders, full-screen breaks, local stats.</h2>
+      <p>Eye Break stays in the menu bar and gives you the controls you need without turning breaks into another app to manage.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="card feat"><span class="f-ic">20</span><h3>Eye and stand breaks</h3><p>Short 20-second eye breaks plus longer stand breaks, each with independent timing.</p></div>
+      <div class="card feat"><span class="f-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="13" rx="2"/><path d="M8 21h8"/></svg></span><h3>Full-screen overlay</h3><p>The break appears across connected displays so the reminder is hard to miss.</p></div>
+      <div class="card feat"><span class="f-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4.5V10h-5.5"/></svg></span><h3>Snooze and skip</h3><p>Use the overlay controls when a break lands at the wrong moment.</p></div>
+      <div class="card feat"><span class="f-ic">30</span><h3>Pause controls</h3><p>Pause reminders for 30 minutes or one hour directly from the menu bar.</p></div>
+      <div class="card feat"><span class="f-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M7 17h10"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg></span><h3>Configurable schedule</h3><p>Change intervals, durations, snooze length, and launch-at-login from settings.</p></div>
+      <div class="card feat"><span class="f-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h12"/><path d="M13 8l4 4-4 4"/><path d="M5 5h14a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 19 19H5A1.5 1.5 0 0 1 3.5 17.5v-11A1.5 1.5 0 0 1 5 5Z"/></svg></span><h3>Launch at login</h3><p>Start Eye Break automatically when you sign in, so the menu-bar reminder is always ready.</p></div>
+      <div class="card feat"><span class="f-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><rect x="7" y="11" width="3" height="5"/><rect x="12" y="8" width="3" height="8"/><rect x="17" y="4" width="3" height="12"/></svg></span><h3>Local stats</h3><p>See active time, expected breaks, completed breaks, skipped breaks, and snoozes.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-sec lp" id="schedule">
+    <div class="lp-sec-head">
+      <p class="eyebrow">Schedule</p>
+      <h2>Defaults that are sensible, controls when you need them.</h2>
+      <p>The app ships with 20-minute eye breaks and 60-minute stand breaks, then lets you tune the rhythm.</p>
+    </div>
+    <div class="card schedule-card">
+      <div class="schedule-controls">
+        <label>Eye break every <strong id="eye-interval-out">20min</strong><input id="eye-interval" data-schedule data-output="eye-interval-out" data-unit="min" type="range" min="5" max="60" value="20" /></label>
+        <label>Eye break duration <strong id="eye-length-out">20sec</strong><input id="eye-length" data-schedule data-output="eye-length-out" data-unit="sec" type="range" min="5" max="90" value="20" /></label>
+        <label>Stand break every <strong id="stand-interval-out">60min</strong><input id="stand-interval" data-schedule data-output="stand-interval-out" data-unit="min" type="range" min="15" max="180" value="60" /></label>
+        <label>Stand break duration <strong id="stand-length-out">90sec</strong><input id="stand-length" data-schedule data-output="stand-length-out" data-unit="sec" type="range" min="30" max="300" value="90" /></label>
+      </div>
+      <div class="schedule-preview">
+        <span class="fv-label">Current rhythm</span>
+        <div class="rhythm-row"><span>Eye break</span><b><span id="eye-every">20 min</span> / <span id="eye-duration">20 sec</span></b></div>
+        <div class="rhythm-row"><span>Stand break</span><b><span id="stand-every">60 min</span> / <span id="stand-duration">90 sec</span></b></div>
+        <p>Timers advance only while you are actively using the computer. Idle time does not quietly drain the schedule.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-sec lp" id="get">
+    <div class="get-wrap">
+      <img src="apple-touch-icon.png" alt="" width="76" height="76" />
+      <h2>Get Eye Break</h2>
+      <p>A small native menu-bar utility for healthier screen rhythm on macOS.</p>
+      <div class="hero-cta">
+        <a class="bigbtn primary" href="https://github.com/davideagostini/eye-break/releases/latest" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M2 20h20"/><path d="M10 16.5 9.4 20M14 16.5l.6 3.5"/></svg>Download latest release</a>
+        <a class="bigbtn" href="https://github.com/davideagostini/eye-break" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.34 9.34 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>Star on GitHub</a>
+      </div>
+      <span class="get-note">Current version: 0.1.6</span>
+    </div>
+  </section>
+
+  <footer class="lp-foot">
+    <div class="lp">
+      <div class="ft-brand"><span class="mk"><svg width="15" height="15" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12C6 5.8 10.8 3 16 3s10 2.8 13.5 9c-3.5 6.2-8.3 9-13.5 9S6 18.2 2.5 12Z"/><circle cx="16" cy="12" r="4.8"/></svg></span>Eye Break</div>
+      <span class="ft-meta">© 2026 <a href="https://davideagostini.com" target="_blank" rel="noopener">Davide Agostini</a></span>
+      <div class="ft-links">
+        <a href="https://github.com/davideagostini/eye-break" target="_blank" rel="noopener">GitHub</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
