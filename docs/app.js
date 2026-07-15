@@ -65,6 +65,7 @@
       }
     };
     var countdownId = null;
+    var restartId = null;
     var activeKind = 'eyes';
     var remainingSeconds = data.eyes.seconds;
 
@@ -82,12 +83,20 @@
       }
     }
 
+    function stopRestart() {
+      if (restartId) {
+        window.clearTimeout(restartId);
+        restartId = null;
+      }
+    }
+
     function updateTimer() {
       timer.textContent = formatTime(remainingSeconds);
     }
 
     function dismissBreak(result) {
       stopCountdown();
+      stopRestart();
       demo.classList.add('break-dismissed');
       if (result === 'completed') {
         status.textContent = activeKind === 'eyes' ? 'Eye break completed' : 'Stand break completed';
@@ -96,8 +105,11 @@
       } else {
         status.textContent = activeKind === 'eyes' ? 'Eye break skipped' : 'Stand break skipped';
       }
-      nextEye.textContent = activeKind === 'eyes' ? '20m 00s' : 'After stand break';
-      nextStand.textContent = activeKind === 'stand' ? '60m 00s' : '40m 00s';
+      nextEye.textContent = activeKind === 'eyes' ? 'Demo restarts soon' : 'After stand break';
+      nextStand.textContent = activeKind === 'stand' ? 'Demo restarts soon' : '40m 00s';
+      restartId = window.setTimeout(function () {
+        setKind(activeKind);
+      }, 6000);
     }
 
     function startCountdown() {
@@ -112,6 +124,7 @@
 
     function setKind(kind) {
       var current = data[kind] || data.eyes;
+      stopRestart();
       activeKind = kind;
       remainingSeconds = current.seconds;
       demo.classList.remove('break-dismissed');
